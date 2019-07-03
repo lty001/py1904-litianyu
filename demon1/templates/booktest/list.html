@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>列表</title>
+    <link rel="stylesheet" href="/static/css/main.css/">
+</head>
+<body>
+    <h2>列表页</h2>
+
+    <ul>
+        {% for book in books %}
+        <a href="/detail/{{book.id}}/"><li>{{book.title}}</li></a>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>
