@@ -11,7 +11,9 @@ class BookInfo(models.Model):
 
 class HeroInfo(models.Model):
     name=models.CharField(max_length=20)
-    gender=models.BooleanField(default=True)
+    # gender=models.BooleanField(default=True)
+    gender=models.CharField(max_length=5,choices=(('man','男'),('woman','女')))
+    camp=models.CharField(max_length=5,choices=(('good','光明'),('bad','黑暗')),default='good')
     content=models.CharField(max_length=100)
     book=models.ForeignKey(BookInfo,on_delete=models.CASCADE)
 

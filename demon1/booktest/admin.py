@@ -17,7 +17,9 @@ class BookInfoAdmin(admin.ModelAdmin):
 admin.site.register(BookInfo,BookInfoAdmin)
 
 class HeroInfoAdmin(admin.ModelAdmin):
-    list_display = ['name','content']
-    search_fields = ['name','content']
+
+
+    list_display = ['name','content','camp','gender',]
+    search_fields = ['name','content','camp','gender',]
 
 admin.site.register(HeroInfo,HeroInfoAdmin)

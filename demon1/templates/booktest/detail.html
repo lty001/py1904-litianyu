@@ -13,12 +13,16 @@
         <h3>拥有角色</h3>
         <ul>
             {% for hero in book.heroinfo_set.all %}
-                <li>{{hero.name}}--{{hero.content}}</li>
+                <li>{{hero.name}}--{{hero.content}}--<a href="{% url 'booktest:deleteHero' hero.id %}">删除</a></li>
             {% endfor %}
         </ul>
     {% else %}
         <h3>没有角色</h3>
     {% endif %}
-    <a href="/">返回首页</a>
+    <br>
+    <a href="{% url 'booktest:addHero' book.id %}">添加英雄</a>
+    <br>
+    {# <a href="/">返回首页</a> #}
+    <a href="{% url 'booktest:index' %}">返回首页</a>
 </body>
 </html>
