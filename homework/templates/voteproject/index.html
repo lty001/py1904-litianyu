@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+    <h2>列表页</h2>
+
+    <ul>
+        {% for title in titles %}
+        {# <a href="/vote/{{title.id}}/"><li>{{title.title}}</li></a> #}
+
+        <a href="{% url 'voteproject:vote' title.id %}">
+            <li>{{title.title}}</li>
+        </a>
+        {% endfor %}
+    </ul>
+</body>
+</html>
