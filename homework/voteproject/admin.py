@@ -4,23 +4,23 @@ from .models import *
 # Register your models here.
 
 
-# class VoteAnswerInlines(admin.StackedInline):
-#     model = VoteTitle
+# class ChoiceInlines(admin.StackedInline):
+#     model = Question
 #     extra = 1
 
-class VoteTitleAdmin(admin.ModelAdmin):
-    list_display = ('title',)
-    list_filter = ('title',)
+class QuestionAdmin(admin.ModelAdmin):
+    list_display = ('desc',)
+    list_filter = ('desc',)
     list_per_page = 10
-    # inlines = [VoteAnswerInlines]
+    # inlines = [ChoiceInlines]
 
 
-admin.site.register(VoteTitle,VoteTitleAdmin)
+admin.site.register(Question,QuestionAdmin)
 
-class VoteAnswerAdmin(admin.ModelAdmin):
+class ChoiceAdmin(admin.ModelAdmin):
 
 
-    list_display = ['answer','num']
-    search_fields = ['answer','num']
+    list_display = ['desc','votes']
+    search_fields = ['desc','votes']
 
-admin.site.register(VoteAnswer,VoteAnswerAdmin)
+admin.site.register(Choice,ChoiceAdmin)

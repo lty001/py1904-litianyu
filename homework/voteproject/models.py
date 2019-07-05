@@ -3,16 +3,16 @@ from django.db import models
 # Create your models here.
 
 
-class VoteTitle(models.Model):
-    title=models.CharField(max_length=100)
+class Question(models.Model):
+    desc=models.CharField(max_length=100)
 
     def __str__(self):
-        return self.title
+        return self.desc
 
-class VoteAnswer(models.Model):
-    answer=models.CharField(max_length=20)
-    num=models.IntegerField(max_length=10)
-    link=models.ForeignKey(VoteTitle,on_delete=models.CASCADE)
+class Choice(models.Model):
+    desc=models.CharField(max_length=20)
+    votes=models.IntegerField(default=0)
+    question=models.ForeignKey(Question,on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.answer
+        return self.desc
