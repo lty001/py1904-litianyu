@@ -48,3 +48,10 @@ def addhero(request,id):
         hero.ctry=ct
         hero.save()
         return redirect(reverse('bookproject:detail',args=(id,)))
+
+def addcountry(request):
+    name=request.POST.get('ctname')
+    country=Country()
+    country.cname=name
+    country.save()
+    return redirect(reverse('bookproject:list'))

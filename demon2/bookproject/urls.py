@@ -13,4 +13,5 @@ urlpatterns=[
     url(r'^deletecountry/(\d+)/$',views.deletecountry,name='deletecountry'),
     url(r'^deletehero/(\d+)/$',views.deletehero,name='deletehero'),
     url(r'^addhero/(\d+)/$',views.addhero,name='addhero'),
+    url(r'^addcountry/$',views.addcountry,name='addcountry')
 ]
