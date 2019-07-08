@@ -12,7 +12,11 @@
 </head>
 <body>
     <div class="container">
-        <h2>当前处于首页</h2>
+        {% if request.user and request.user.is_authenticated %}
+        当前用户 {{request.user}} <a href="{% url 'pollproject:logout' %}">退出登录</a>
+        {% else %}
+        没有用户
+        {% endif %}
         <h3>问题列表如下</h3>
         <ul>
             {% for q in questions %}
