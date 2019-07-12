@@ -24,7 +24,8 @@ urlpatterns = [
     # path('admin/', admin.site.urls),
     path('xadmin/',xadmin.site.urls),
     url(r'^media/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT}),
-    url('',include('blog.urls',namespace='blog')),
     url('ueditor/',include('DjangoUeditor.urls')),
+    url('search/',include('haystack.urls')),
+    url('',include('blog.urls',namespace='blog')),
     url('',include('comment.urls',namespace='comment')),
 ]

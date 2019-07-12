@@ -70,7 +70,7 @@
             <div class="col-md-12">
                 <label for="id_content">评论：</label>
                 {{cf.content}}
-                <button class="comment-btn" id="tijiao">发表</button>
+                <button class="comment-btn" id="btn_commit">发表</button>
             </div>
         </div>    <!-- row -->
     </div>
@@ -90,12 +90,9 @@
         </ul>
     </div>
 </section>
-{% endblock %}
-
-
 <script>
     $(function () {
-        $('#tijiao').click(function () {
+        $("#btn_commit").click(function () {
             $.ajax({
                 url:"{% url 'comment:comment' article.id %}",
                 type:'post',
@@ -117,5 +114,7 @@
         })
     })
 
+
 </script>
+{% endblock %}
 
