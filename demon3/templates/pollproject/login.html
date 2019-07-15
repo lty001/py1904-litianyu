@@ -93,6 +93,11 @@
                         {{lgf.password.label}}
                         {{lgf.password}}
                     </div>
+                    <div class="form-group">
+                        {{lgf.verify.label}}
+                        <img id="verify" src="{% url 'pollproject:verify' %}" alt="">
+                        {{lgf.verify}}
+                    </div>
 
                     <button type="submit" class="btn btn-default">登录</button>
                 </form>
@@ -118,6 +123,10 @@
                         {{rgf.telephone.label}}
                         {{rgf.telephone}}
                     </div>
+                    <div class="form-group">
+                        {{rgf.email.label}}
+                        {{rgf.email}}
+                    </div>
 
                     <button type="submit" class="btn btn-default">注册</button>
                 </form>
@@ -126,6 +135,14 @@
     </div>
 
 </div>
+
+<script>
+    $(function () {
+        $('#verify').click(function () {
+            $(this).attr('src','/verify/?t='+new Date().getTime())
+        })
+    })
+</script>
 
 </body>
 </html>

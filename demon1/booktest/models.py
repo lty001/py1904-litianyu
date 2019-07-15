@@ -1,4 +1,5 @@
 from django.db import models
+# from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -19,3 +20,29 @@ class HeroInfo(models.Model):
 
     def __str__(self):
         return self.name
+
+
+
+class User(models.Model):
+    name=models.CharField(max_length=10)
+
+class Tel(models.Model):
+    num=models.CharField(max_length=11)
+    username=models.ForeignKey(User,on_delete=models.CASCADE)
+
+
+class Account(models.Model):
+    username=models.CharField(max_length=10)
+
+class Password(models.Model):
+    pwd=models.CharField(max_length=10)
+    acc=models.OneToOneField(Account,on_delete=models.CASCADE)
+
+
+class Host(models.Model):
+    hname=models.CharField(max_length=10)
+
+class App(models.Model):
+    aname=models.CharField(max_length=10)
+    h=models.ManyToManyField(Host)
+
