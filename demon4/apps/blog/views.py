@@ -57,6 +57,11 @@ class AddArticleView(View):
         else:
             return HttpResponse('添加失败')
 
+class ContactView(View):
+    def get(self,request):
+        return render(request,'blog/contact.html')
+
+
 class ArchivesView(View):
     def get(self,request,year,month):
         ads = Ads.objects.all()
