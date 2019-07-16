@@ -1,0 +1,33 @@
+{% extends 'fruitmall/base.html' %}
+{% block title %}
+<title>登录</title>
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="/static/css/common.css" type="text/css" media="all" />
+<link rel="stylesheet" href="/static/css/login.css" type="text/css" media="all" />
+<script type="text/javascript" src="/static/js/jquery.js"></script>
+{% endblock %}
+
+{% block container %}
+  <div id="container">
+    <div class="login-con">
+      <form method="post" action="{% url 'fruitmall:login' %}">
+        <fieldset>
+          <legend>用户登录</legend>
+          <div class="login-cont">
+            <p class="login-left"><img src="/static/img/img-login.gif" width="233" height="204" alt="赢在起点，笑在路上" /></p>
+            <div class="login-right">
+              <p class="login-name"><input type="text" value="请输入您的用户名" onfocus="$(this).css('color','#000').val('');" /></p>
+              <p class="login-password"><input type="text" value="请输入您的密码" onfocus="$(this).attr('type','password').css('color','#000').val('');" /></p>
+              <p><a href="javascript:;">忘记密码？</a></p>
+              <p class="btn-login"><img src="/static/img/btn-login02.gif" width="223" height="30" alt="登录" /></p>
+              <p class="new-user"><a href="{% url 'fruitmall:regist' %}">新用户注册</a></p>
+            </div>
+          </div>
+  		</fieldset>
+      </form>
+    </div>
+  </div>
+{% endblock %}
+

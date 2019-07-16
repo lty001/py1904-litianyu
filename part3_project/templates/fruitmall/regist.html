@@ -1,0 +1,62 @@
+{% extends 'fruitmall/base.html' %}
+{% block title %}
+<title>注册</title>
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="/static/css/common.css" type="text/css" media="all" />
+<link rel="stylesheet" href="/static/css/regist.css" type="text/css" media="all" />
+<script type="text/javascript" src="/static/js/jquery.js"></script>
+{% endblock %}
+
+{% block container %}
+  <div id="container">
+    <div class="regist-con">
+      <form method="post" action="{% url 'fruitmall:regist' %}">
+        <fieldset>
+          <legend>用户注册</legend>
+          <ul class="regist-cont">
+            <li>
+              <dl>
+                <dt>用户名：</dt>
+                <dd><input type="text" value="请输入您的用户名" onfocus="$(this).css('color','#000').val('');" /></dd>
+              </dl>
+              <span>*</span>
+            </li>
+            <li>
+              <dl>
+                <dt>密码：</dt>
+                <dd class="regist-password"><input type="text" value="请输入您的密码" onfocus="$(this).attr('type','password').css('color','#000').val('');" /></dd>
+              </dl>
+              <span>*</span>
+            </li>
+            <li>
+              <dl>
+                <dt>确认密码：</dt>
+                <dd class="insure-password"><input type="text" value="请再次输入您的密码" onfocus="$(this).attr('type','password').css('color','#000').val('');" /></dd>
+              </dl>
+              <span>*</span>
+            </li>
+            <li>
+              <dl>
+                <dt>电话：</dt>
+                <dd><input type="text" value="请输入您的电话号码" onfocus="$(this).css('color','#000').val('');" /></dd>
+              </dl>
+              <span>*</span>
+            </li>
+            <li>
+              <dl>
+                <dt>电子邮箱：</dt>
+                <dd><input type="text" value="请输入您的电子邮箱" onfocus="$(this).css('color','#000').val('');" /></dd>
+              </dl>
+              <span>*</span>
+            </li>
+          </ul>
+          <p class="btn-regist"><a href="javascript:;"><img src="/static/img/btn-regist02.gif" width="223" height="30" alt="注册" /></a></p>
+          <p class="login-direct"><a href="{% url 'fruitmall:login' %}">直接登录</a></p>
+  		</fieldset>
+      </form>
+    </div>
+  </div>
+{% endblock %}
+
