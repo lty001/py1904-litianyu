@@ -33,6 +33,8 @@ class AddGoods(models.Model):
     img=models.ImageField(upload_to='goods')
     desc=models.CharField(max_length=50)
     price=models.CharField(max_length=10)
+    num=models.IntegerField(default=100)
+    wight=models.IntegerField(default=100)
     integral=models.IntegerField(default=5)
     update_time=models.DateTimeField(auto_now_add=True)
     tags=models.ManyToManyField(Tags)
@@ -56,6 +58,4 @@ class News(models.Model):
     views=models.IntegerField(default=0)
     body=models.TextField()
     creatr_time=models.DateTimeField(auto_now_add=True)
-
-
 

@@ -37,55 +37,13 @@
             <h1 class="title">掌柜推荐</h1>
             <div class="rec-slider">
                 <ul>
-                    <li>
-                        <p class="recom-img"><a href="{% url 'fruitmall:details' %}"><img
-                                src="/static/img/ico-recommend01.jpg" alt="猕猴桃" width="163" height="153"/> <span></span>
-                        </a></p>
-                        <p class="recom-name"><a href="{% url 'fruitmall:details' %}">猕猴桃（新品上市）</a></p>
-                        <p class="recom-price">￥5.60/斤</p>
-                    </li>
-                    <li>
-                        <p class="recom-img"><a href="{% url 'fruitmall:details' %}"><img
-                                src="/static/img/ico-recommend01.jpg" alt="猕猴桃" width="163" height="153"/> <span></span>
-                        </a></p>
-                        <p class="recom-name"><a href="{% url 'fruitmall:details' %}">猕猴桃（新品上市）</a></p>
-                        <p class="recom-price">￥5.60/斤</p>
-                    </li>
-                    <li>
-                        <p class="recom-img"><a href="{% url 'fruitmall:details' %}"><img
-                                src="/static/img/ico-recommend01.jpg" alt="猕猴桃" width="163" height="153"/> <span></span>
-                        </a></p>
-                        <p class="recom-name"><a href="{% url 'fruitmall:details' %}">猕猴桃（新品上市）</a></p>
-                        <p class="recom-price">￥5.60/斤</p>
-                    </li>
-                    <li>
-                        <p class="recom-img"><a href="{% url 'fruitmall:details' %}"><img
-                                src="/static/img/ico-recommend01.jpg" alt="猕猴桃" width="163" height="153"/> <span></span>
-                        </a></p>
-                        <p class="recom-name"><a href="{% url 'fruitmall:details' %}">猕猴桃（新品上市）</a></p>
-                        <p class="recom-price">￥5.60/斤</p>
-                    </li>
-                    <li>
-                        <p class="recom-img"><a href="{% url 'fruitmall:details' %}"><img
-                                src="/static/img/ico-recommend01.jpg" alt="猕猴桃" width="163" height="153"/> <span></span>
-                        </a></p>
-                        <p class="recom-name"><a href="{% url 'fruitmall:details' %}">猕猴桃（新品上市）</a></p>
-                        <p class="recom-price">￥5.60/斤</p>
-                    </li>
-                    <li>
-                        <p class="recom-img"><a href="{% url 'fruitmall:details' %}"><img
-                                src="/static/img/ico-recommend01.jpg" alt="猕猴桃" width="163" height="153"/> <span></span>
-                        </a></p>
-                        <p class="recom-name"><a href="{% url 'fruitmall:details' %}">猕猴桃（新品上市）</a></p>
-                        <p class="recom-price">￥5.60/斤</p>
-                    </li>
-                    <li>
-                        <p class="recom-img"><a href="{% url 'fruitmall:details' %}"><img
-                                src="/static/img/ico-recommend01.jpg" alt="猕猴桃" width="163" height="153"/> <span></span></a>
-                        </p>
-                        <p class="recom-name"><a href="{% url 'fruitmall:details' %}">猕猴桃（新品上市）</a></p>
-                        <p class="recom-price">￥5.60/斤</p>
-                    </li>
+                    {% for g in goods %}
+                        <li>
+                            <p class="recom-img"><a href="{% url 'fruitmall:details' g.id %}"><img src="/media/{{g.img}}" alt="猕猴桃" width="163" height="153"/> <span></span> </a></p>
+                            <p class="recom-name"><a href="{% url 'fruitmall:details' g.id %}">{{g.name}}（新品上市）</a></p>
+                            <p class="recom-price">￥{{g.price}}/斤</p>
+                        </li>
+                    {% endfor %}
                 </ul>
             </div>
             <p class="recommend-tab">

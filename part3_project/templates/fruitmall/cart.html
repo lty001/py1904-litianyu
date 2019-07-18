@@ -26,12 +26,12 @@
                 <li class="count">数量</li>
                 <li class="operation">操作</li>
             </ul>
+            {% for g in page.object_list %}
             <ul class="shopping-message">
-                <li class="checked"><span><input type="checkbox"/></span><img src="/static/img/cart/img-cart01.jpg"
-                                                                              width="80" height="80" alt="蚕豆"/></li>
-                <li class="name"><a href="details.html">【三只松鼠_蟹黄蚕豆】休闲坚果零食炒货小吃豆制品蚕豆205g</a></li>
-                <li class="message">休闲坚果零食炒货小吃豆制品蚕豆205g</li>
-                <li class="price">199.00</li>
+                <li class="checked"><span><input type="checkbox"/></span><img src="/media/{{g.img}}" width="80" height="80" alt="蚕豆"/></li>
+                <li class="name"><a href="details.html">{{g.name}}</a></li>
+                <li class="message">{{g.desc}}</li>
+                <li class="price">{{g.price}}</li>
                 <li class="count">
                     <span>-</span>
                     <span class="count-number"><input type="text" value="1"/></span>
@@ -58,34 +58,28 @@
                             alert("callback")
                         });
                     });
-                    /*$(".insure-btn-con").delegate(".sure-btn","click",function(){
-                    alert("fdsafs");
-                    var data={};
-                    data.ids=new Array();
-                    $(".removeRow").each(function(){
-                        ids.push($(this).parents(".shopping-message").find("input[type='checkbox']").attr("id"));
-                    });
-                    data.siteId=$("#siteId").attr("siteId");
-                    data._method="delete";
-                    if(data.ids&&data.ids.length>0){
-                        removeGoods(data);
-                    }
-                });*/
                 </script>
             </ul>
-            <ul class="shopping-message">
-                <li class="checked"><span><input type="checkbox"/></span><img src="/static/img/cart/img-cart01.jpg"
-                                                                              width="80" height="80" alt="蚕豆"/></li>
-                <li class="name"><a href="details.html">【三只松鼠_蟹黄蚕豆】休闲坚果零食炒货小吃豆制品蚕豆205g</a></li>
-                <li class="message">休闲坚果零食炒货小吃豆制品蚕豆205g</li>
-                <li class="price">199.00</li>
-                <li class="count">
-                    <span>-</span>
-                    <span class="count-number"><input type="text" value="1"/></span>
-                    <span>+</span>
-                </li>
-                <li class="operation"><a href="javascript:;">删除</a></li>
-            </ul>
+            {% endfor %}
+            <div class="page-list">
+                <p>
+                    {% if page.has_previous %}
+                    <span><a href="?page={{page.previous_page_number}}">&lt;上一页</a></span>
+                    {% endif %}
+
+                    {% for i in page.paginator.page_range %}
+                        {% if i == page.number %}
+                            <span class="page-active"><a href="?page={{i}}">{{i}}</a></span>
+                        {% else %}
+                            <span><a href="?page={{i}}">{{i}}</a></span>
+                        {% endif %}
+                    {% endfor %}
+                    {% if page.has_next %}
+                        <span><a href="?page={{page.next_page_number}}">下一页&gt;</a></span>
+                    {% endif %}
+                </p>
+            </div>
+
             <div class="cart-operation">
                 <div class="del-clear">
                     <span class="delete">删除选中的商品</span>
@@ -101,63 +95,22 @@
                 <span class="cash-total">￥398.00</span>
             </div>
             <div class="contiue-pay">
-                <a href="product.html" class="contiue">继续购物</a>
-                <a href="settlement.html" class="pay">结 算</a>
+                <a href="{% url 'fruitmall:product' %}" class="contiue">继续购物</a>
+                <a href="{% url 'fruitmall:settlement' %}" class="pay">结 算</a>
             </div>
         </div>
+
         <div class="recommend">
             <h1 class="title">掌柜推荐</h1>
             <div class="rec-slider">
                 <ul>
-                    <li>
-                        <p class="recom-img"><a href="details.html"><img src="/static/img/ico-recommend01.jpg" alt="猕猴桃"
-                                                                         width="163" height="153"/> <span></span> </a>
-                        </p>
-                        <p class="recom-name"><a href="details.html">猕猴桃（新品上市）</a></p>
-                        <p class="recom-price">￥5.60/斤</p>
-                    </li>
-                    <li>
-                        <p class="recom-img"><a href="details.html"><img src="/static/img/ico-recommend01.jpg" alt="猕猴桃"
-                                                                         width="163" height="153"/> <span></span> </a>
-                        </p>
-                        <p class="recom-name"><a href="details.html">猕猴桃（新品上市）</a></p>
-                        <p class="recom-price">￥5.60/斤</p>
-                    </li>
-                    <li>
-                        <p class="recom-img"><a href="details.html"><img src="/static/img/ico-recommend01.jpg" alt="猕猴桃"
-                                                                         width="163" height="153"/> <span></span> </a>
-                        </p>
-                        <p class="recom-name"><a href="details.html">猕猴桃（新品上市）</a></p>
-                        <p class="recom-price">￥5.60/斤</p>
-                    </li>
-                    <li>
-                        <p class="recom-img"><a href="details.html"><img src="/static/img/ico-recommend01.jpg" alt="猕猴桃"
-                                                                         width="163" height="153"/> <span></span> </a>
-                        </p>
-                        <p class="recom-name"><a href="details.html">猕猴桃（新品上市）</a></p>
-                        <p class="recom-price">￥5.60/斤</p>
-                    </li>
-                    <li>
-                        <p class="recom-img"><a href="details.html"><img src="/static/img/ico-recommend01.jpg" alt="猕猴桃"
-                                                                         width="163" height="153"/> <span></span> </a>
-                        </p>
-                        <p class="recom-name"><a href="details.html">猕猴桃（新品上市）</a></p>
-                        <p class="recom-price">￥5.60/斤</p>
-                    </li>
-                    <li>
-                        <p class="recom-img"><a href="details.html"><img src="/static/img/ico-recommend01.jpg" alt="猕猴桃"
-                                                                         width="163" height="153"/> <span></span> </a>
-                        </p>
-                        <p class="recom-name"><a href="details.html">猕猴桃（新品上市）</a></p>
-                        <p class="recom-price">￥5.60/斤</p>
-                    </li>
-                    <li>
-                        <p class="recom-img"><a href="details.html"><img src="/static/img/ico-recommend01.jpg" alt="猕猴桃"
-                                                                         width="163" height="153"/> <span></span></a>
-                        </p>
-                        <p class="recom-name"><a href="details.html">猕猴桃（新品上市）</a></p>
-                        <p class="recom-price">￥5.60/斤</p>
-                    </li>
+                    {% for g in goods %}
+                        <li>
+                            <p class="recom-img"><a href="{% url 'fruitmall:details' g.id %}"><img src="/media/{{g.img}}" alt="猕猴桃" width="163" height="153"/> <span></span> </a></p>
+                            <p class="recom-name"><a href="{% url 'fruitmall:details' g.id %}">{{g.name}}（新品上市）</a></p>
+                            <p class="recom-price">￥{{g.price}}/斤</p>
+                        </li>
+                    {% endfor %}
                 </ul>
             </div>
             <p class="recommend-tab">

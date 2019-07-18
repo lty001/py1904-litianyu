@@ -16,23 +16,33 @@
     <div id="nav-side">
         <div class="person-container">
             <div class="person-message">
-                <p class="person-photo"><img src="/static/img/img-person.jpg" width="87" height="87" alt="张三丰"/></p>
-                <p class="person-name">张三丰，您好！</p>
+                <p class="person-photo"><img src="/static/img/img-person.jpg" width="87" height="87" alt="{{account}}"/>
+                </p>
+                {% if account %}
+                <p class="person-name">{{account}}，您好！</p>
                 <p class="person-repair"><a href="{% url 'fruitmall:data' %}">[修改]</a></p>
+                {% else %}
+                <p class="person-name">尚未登陆！</p>
+                <p class="person-repair"><a href="{% url 'fruitmall:data' %}">
+                    <button>登录</button>
+                </a></p>
+                {% endif %}
             </div>
             <div class="my-message">
+                {% for i in up %}
                 <p class="my-address">
                     <a href="{% url 'fruitmall:address' %}">我的地址</a>
                 </p>
                 <p class="my-intrgral">
-                    <a href="{% url 'fruitmall:integral' %}">我的积分：<span>122</span></a>
+                    <a href="{% url 'fruitmall:integral' %}">我的积分：<span>{{i.integral}}</span></a>
                 </p>
                 <p class="my-coupon">
-                    <a href="{% url 'fruitmall:coupon' %}">我的优惠券：<span>4张</span></a>
+                    <a href="{% url 'fruitmall:coupon' %}">我的优惠券：<span>{{i.coupon}}张</span></a>
                 </p>
                 <p class="my-record">
                     <a href="{% url 'fruitmall:record' %}">购买记录</a>
                 </p>
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -50,84 +60,71 @@
                 <li class="condition">使用条件</li>
                 <li class="sitiuation">使用情况</li>
             </ul>
+
             <ul class="coupon-details">
-                <li class="value"><img src="/static/img/coupon/img-coupon01.jpg" width="137" height="52" alt="优惠券"/></li>
+                <li class="value"><img src="/static/img/coupon/img-coupon01.jpg" width="137" height="52" alt="优惠券"/>
+                </li>
                 <li class="term">2014-11-11 至 2014-12-12</li>
                 <li class="condition">订单满￥ 200 (不含邮费)</li>
                 <li class="sitiuation">未使用 <a href="javascript:;">马上使用 &gt;</a></li>
             </ul>
             <ul class="coupon-details">
-                <li class="value"><img src="/static/img/coupon/img-coupon01.jpg" width="137" height="52" alt="优惠券"/></li>
+                <li class="value"><img src="/static/img/coupon/img-coupon01.jpg" width="137" height="52" alt="优惠券"/>
+                </li>
                 <li class="term">2014-11-11 至 2014-12-12</li>
                 <li class="condition">订单满￥ 200 (不含邮费)</li>
                 <li class="sitiuation">未使用 <a href="javascript:;">马上使用 &gt;</a></li>
             </ul>
             <ul class="coupon-details">
-                <li class="value"><img src="/static/img/coupon/img-coupon01.jpg" width="137" height="52" alt="优惠券"/></li>
+                <li class="value"><img src="/static/img/coupon/img-coupon01.jpg" width="137" height="52" alt="优惠券"/>
+                </li>
                 <li class="term">2014-11-11 至 2014-12-12</li>
                 <li class="condition">订单满￥ 200 (不含邮费)</li>
                 <li class="sitiuation">未使用 <a href="javascript:;">马上使用 &gt;</a></li>
             </ul>
             <ul class="coupon-details">
-                <li class="value"><img src="/static/img/coupon/img-coupon01.jpg" width="137" height="52" alt="优惠券"/></li>
+                <li class="value"><img src="/static/img/coupon/img-coupon01.jpg" width="137" height="52" alt="优惠券"/>
+                </li>
                 <li class="term">2014-11-11 至 2014-12-12</li>
                 <li class="condition">订单满￥ 200 (不含邮费)</li>
                 <li class="sitiuation">已使用 <a href="javascript:;" class="used">马上使用 &gt;</a></li>
             </ul>
+
         </div>
 
         <div class="page-list">
             <p>
-                <span>&lt;上一页</span>
-                <span class="page-active">1</span>
-                <span>2</span>
-                <span>3</span>
-                <span>4</span>
-                <span>5</span>
-                <span>6</span>
-                <span>7</span>
-                <span>下一页&gt;</span>
+                {% if page.has_previous %}
+                    <span> <a href="?page={{page.previous_page_number}}">&lt;上一页</a></span>
+                {% endif %}
+
+                {% for i in page.paginator.page_range %}
+                    {% if i == page.number %}
+                        <span class="page-active"><a href="?page={{i}}">{{i}}</a></span>
+                    {% else %}
+                        <span><a href="?page={{i}}">{{i}}</a></span>
+                    {% endif %}
+                {% endfor %}
+
+                {% if page.has_next %}
+                    <span><a href="?page={{page.next_page_number}}">下一页&gt;</a></span>
+                {% endif %}
             </p>
         </div>
         <div class="recommend">
             <h1 class="title">掌柜推荐</h1>
             <div class="rec-slider">
                 <ul>
+                    {% for g in goods %}
                     <li>
-                        <p class="recom-img"><a href="{% url 'fruitmall:details' %}"><img src="/static/img/ico-recommend01.jpg" alt="猕猴桃" width="163" height="153"/> <span></span> </a></p>
-                        <p class="recom-name"><a href="{% url 'fruitmall:details' %}">猕猴桃（新品上市）</a></p>
-                        <p class="recom-price">￥5.60/斤</p>
+                        <p class="recom-img"><a href="{% url 'fruitmall:details' g.id %}"><img src="/media/{{g.img}}"
+                                                                                               alt="猕猴桃" width="163"
+                                                                                               height="153"/>
+                            <span></span> </a></p>
+                        <p class="recom-name"><a href="{% url 'fruitmall:details' g.id %}">{{g.name}}（新品上市）</a></p>
+                        <p class="recom-price">￥{{g.price}}/斤</p>
                     </li>
-                    <li>
-                        <p class="recom-img"><a href="{% url 'fruitmall:details' %}"><img src="/static/img/ico-recommend01.jpg" alt="猕猴桃" width="163" height="153"/> <span></span> </a></p>
-                        <p class="recom-name"><a href="{% url 'fruitmall:details' %}">猕猴桃（新品上市）</a></p>
-                        <p class="recom-price">￥5.60/斤</p>
-                    </li>
-                    <li>
-                        <p class="recom-img"><a href="{% url 'fruitmall:details' %}"><img src="/static/img/ico-recommend01.jpg" alt="猕猴桃" width="163" height="153"/> <span></span> </a></p>
-                        <p class="recom-name"><a href="{% url 'fruitmall:details' %}">猕猴桃（新品上市）</a></p>
-                        <p class="recom-price">￥5.60/斤</p>
-                    </li>
-                    <li>
-                        <p class="recom-img"><a href="{% url 'fruitmall:details' %}"><img src="/static/img/ico-recommend01.jpg" alt="猕猴桃" width="163" height="153"/> <span></span> </a></p>
-                        <p class="recom-name"><a href="{% url 'fruitmall:details' %}">猕猴桃（新品上市）</a></p>
-                        <p class="recom-price">￥5.60/斤</p>
-                    </li>
-                    <li>
-                        <p class="recom-img"><a href="{% url 'fruitmall:details' %}"><img src="/static/img/ico-recommend01.jpg" alt="猕猴桃" width="163" height="153"/> <span></span> </a></p>
-                        <p class="recom-name"><a href="{% url 'fruitmall:details' %}">猕猴桃（新品上市）</a></p>
-                        <p class="recom-price">￥5.60/斤</p>
-                    </li>
-                    <li>
-                        <p class="recom-img"><a href="{% url 'fruitmall:details' %}"><img src="/static/img/ico-recommend01.jpg" alt="猕猴桃" width="163" height="153"/> <span></span> </a></p>
-                        <p class="recom-name"><a href="{% url 'fruitmall:details' %}">猕猴桃（新品上市）</a></p>
-                        <p class="recom-price">￥5.60/斤</p>
-                    </li>
-                    <li>
-                        <p class="recom-img"><a href="{% url 'fruitmall:details' %}"><img src="/static/img/ico-recommend01.jpg" alt="猕猴桃" width="163" height="153"/> <span></span></a></p>
-                        <p class="recom-name"><a href="{% url 'fruitmall:details' %}">猕猴桃（新品上市）</a></p>
-                        <p class="recom-price">￥5.60/斤</p>
-                    </li>
+                    {% endfor %}
                 </ul>
             </div>
             <p class="recommend-tab">

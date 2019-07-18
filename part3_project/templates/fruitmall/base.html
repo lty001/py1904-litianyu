@@ -14,7 +14,8 @@
 </head>
 <body bgcolor="#e0d6df">
     <div id="header">
-    <div class="online-service">
+    {% comment %}
+        <div class="online-service">
         <p><img src="/static/img/ico-online-service.gif" width="71" height="28" alt="在线客服"/></p>
         <p><a target="blank" href="http://wpa.qq.com/msgrd?V=1&Uin=811052479&Site=" 当鼠标移动上来显示的文字"&Menu=yes">
             <img border="0" src="http://wpa.qq.com/pa?p=1:811052479:10" alt="">
@@ -29,6 +30,7 @@
             <img border="0" src="http://wpa.qq.com/pa?p=1:811052479:10" alt="">
             </a></p>
     </div>
+    {% endcomment %}
     <div class="header-top">
         <div class="logo-container"><img src="/static/img/logo-fujia.png" width="197" height="51" alt="logo"/></div>
         <div class="header-nav">
@@ -53,12 +55,9 @@
     <div class="header-bottom">
         <ul class="hot-search">
             <li class="search-title">热门搜索：</a></li>
-            <li><a href="{% url 'fruitmall:details' %}">安岳柠檬</a></li>
-            <li><a href="{% url 'fruitmall:details' %}">安岳柠檬</a></li>
-            <li><a href="{% url 'fruitmall:details' %}">安岳柠檬</a></li>
-            <li><a href="{% url 'fruitmall:details' %}">安岳柠檬</a></li>
-            <li><a href="{% url 'fruitmall:details' %}">安岳柠檬</a></li>
-            <li><a href="{% url 'fruitmall:details' %}">安岳柠檬</a></li>
+            {% for g in goods %}
+                <li><a href="{% url 'fruitmall:details' g.id %}">{{g.name}}</a></li>
+            {% endfor %}
         </ul>
         <div class="search-container">
             <input type="text" onfocus="this.value='';$(this).css('color','#313131');" value="请输入商品名称或输入关键字"/>

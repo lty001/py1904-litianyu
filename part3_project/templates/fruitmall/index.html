@@ -14,101 +14,60 @@
 <div id="container">
     <div id="nav-side">
         <div class="login-container">
-            <p class="login-title"><img src="/static/img/title-login.gif" alt="会员登入" width="147" height="23"/></p>
-            <form>
-                <ul class="login-input">
-                    <li>
-                        <label>账号：</label>
-                        <input type="text"/>
-                    </li>
-                    <li>
-                        <label>密码：</label>
-                        <input type="password"/>
-                    </li>
-                </ul>
-                <p class="f-password"><a href="javascript:;">忘记密码？</a></p>
                 <p class="login-btn">
-                    <a href="javascript:;"><img src="/static/img/btn-login.gif" width="61" height="19" alt="登入"/></a>
+                    <a href="{% url 'fruitmall:login' %}"><img src="/static/img/btn-login.gif" width="61" height="19" alt="登入"/></a>
                     <a href="{% url 'fruitmall:regist' %}"><img src="/static/img/btn-regist.gif" width="61" height="19" alt="注册"/></a>
                 </p>
-            </form>
         </div>
         <div class="login-container">
             <dl class="login-suc">
                 <dt><img src="/static/img/img-photo.jpg" width="62" height="62" alt="头像"/></dt>
                 <dd>
-                    <p class="user-name">张三丰</p>
-                    <p>您好！</p>
+                    {% if account %}
+                        <p class="user-name">{{account}},</p>
+                        <p>您好！</p>
+                        <button><a href="{% url 'fruitmall:logout' %}">退出</a></button>
+                    {% else %}
+                        <p>尚未登陆！</p>
+                        <button><a href="{% url 'fruitmall:login' %}">登录</a></button>
+                    {% endif %}
                 </dd>
             </dl>
-            <p class="my-fujia"><a href="{% url 'fruitmall:record' %}"><img src="/static/img/btn-personal.gif" width="89"
-                                                                  height="21" alt="我的芙佳"/></a></p>
+            <p class="my-fujia"><a href="{% url 'fruitmall:record' %}"><img src="/static/img/btn-personal.gif" width="89" height="21" alt="我的芙佳"/></a></p>
         </div>
         <div class="pro-kinds">
             <h1 class="kinds-tit">产品分类</h1>
             <div class="kinds-cont">
-                <div class="kinds-det">
+                <div class="kinds-det" style="height: 370px">
                     <h2 class="det-tit">新鲜水果</h2>
                     <div class="det-content">
-                        <a href="{% url 'fruitmall:details' %}">苹果</a>
-                        <a href="{% url 'fruitmall:details' %}">猕猴桃</a>
-                        <a href="{% url 'fruitmall:details' %}">苹果</a>
-                        <a href="{% url 'fruitmall:details' %}">梨青柠檬梨青柠檬</a>
-                        <a href="{% url 'fruitmall:details' %}">苹果</a>
-                        <a href="{% url 'fruitmall:details' %}">猕猴桃</a>
-                        <a href="{% url 'fruitmall:details' %}">苹果</a>
-                        <a href="{% url 'fruitmall:details' %}">梨青柠檬</a>
-                        <a href="{% url 'fruitmall:details' %}">苹果</a>
-                        <a href="{% url 'fruitmall:details' %}">猕猴桃</a>
-                        <a href="{% url 'fruitmall:details' %}">苹果</a>
-                        <a href="{% url 'fruitmall:details' %}">梨青柠...</a>
-                        <a href="{% url 'fruitmall:details' %}">苹果</a>
-                        <a href="{% url 'fruitmall:details' %}">猕猴桃</a>
-                        <a href="{% url 'fruitmall:details' %}">苹果</a>
-                        <a href="{% url 'fruitmall:details' %}">梨青柠檬</a>
+                        {% for g in goods %}
+                        <a href="{% url 'fruitmall:details' g.id %}">{{g.name}}</a>
+                        {% endfor %}
                         <div style="clear: both;"></div>
                     </div>
                 </div>
-                <div class="kinds-det">
+                <div class="kinds-det" style="height: 370px">
                     <h2 class="det-tit">有机蔬菜</h2>
                     <div class="det-content">
-                        <a href="{% url 'fruitmall:details' %}">苹果</a>
-                        <a href="{% url 'fruitmall:details' %}">猕猴桃</a>
-                        <a href="{% url 'fruitmall:details' %}">苹果</a>
-                        <a href="{% url 'fruitmall:details' %}">梨青柠檬梨青柠檬</a>
-                        <a href="{% url 'fruitmall:details' %}">苹果</a>
-                        <a href="{% url 'fruitmall:details' %}">猕猴桃</a>
-                        <a href="{% url 'fruitmall:details' %}">苹果</a>
-                        <a href="{% url 'fruitmall:details' %}">梨青柠檬</a>
-                        <a href="{% url 'fruitmall:details' %}">苹果</a>
-                        <a href="{% url 'fruitmall:details' %}">猕猴桃</a>
-                        <a href="{% url 'fruitmall:details' %}">苹果</a>
-                        <a href="{% url 'fruitmall:details' %}">梨青柠...</a>
-                        <a href="{% url 'fruitmall:details' %}">苹果</a>
-                        <a href="{% url 'fruitmall:details' %}">猕猴桃</a>
-                        <a href="{% url 'fruitmall:details' %}">苹果</a>
-                        <a href="{% url 'fruitmall:details' %}">梨青柠檬</a>
+                        {% for g in goods %}
+                        <a href="{% url 'fruitmall:details' g.id %}">{{g.name}}</a>
+                        {% endfor %}
                         <div style="clear: both;"></div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="hot-sale">
+        <div class="hot-sale" style="height: 610px;overflow: hidden">
             <h1 class="hot-tit">热卖商品</h1>
             <div class="hot-cont">
                 <ul class="hot-list">
-                    <li>
-                        <p><a href="{% url 'fruitmall:details' %}"><img src="/static/img/img-hot01.jpg" width="136" height="112" alt="安岳柠檬"/></a></p>
-                        <p class="hot-name"><a href="{% url 'fruitmall:details' %}">安岳柠檬 <span>RMB:100</span></a></p>
-                    </li>
-                    <li>
-                        <p><a href="{% url 'fruitmall:details' %}"><img src="/static/img/img-hot01.jpg" width="136" height="112" alt="安岳柠檬"/></a></p>
-                        <p class="hot-name"><a href="{% url 'fruitmall:details' %}">安岳柠檬 <span>RMB:100</span></a></p>
-                    </li>
-                    <li>
-                        <p><a href="{% url 'fruitmall:details' %}"><img src="/static/img/img-hot01.jpg" width="136" height="112" alt="安岳柠檬"/></a></p>
-                        <p class="hot-name"><a href="{% url 'fruitmall:details' %}">安岳柠檬 <span>RMB:100</span></a></p>
-                    </li>
+                    {% for g in goods %}
+                        <li>
+                            <p><a href="{% url 'fruitmall:details' g.id %}"><img src="/media/{{g.img}}" width="136" height="112" alt="安岳柠檬"/></a></p>
+                            <p class="hot-name"><a href="{% url 'fruitmall:details' g.id %}">{{g.name}} <span>RMB:{{g.price}}</span></a></p>
+                        </li>
+                    {% endfor %}
                 </ul>
             </div>
         </div>
@@ -116,148 +75,85 @@
     <div id="content">
         <div class="banner-cont">
             <ul class="fade-banner" control-fade="banner-control">
-                <li><a href="{% url 'fruitmall:details' %}"><img src="/static/img/bnr-photo01.jpg" width="744" height="303"
-                                                        alt="蒙自石榴"/></a></li>
-                <li><a href="{% url 'fruitmall:details' %}"><img src="/static/img/bnr-photo02.jpg" width="744" height="303"
-                                                        alt="蒙自石榴"/></a></li>
-                <li><a href="{% url 'fruitmall:details' %}"><img src="/static/img/bnr-photo03.jpg" width="744" height="303"
-                                                        alt="蒙自石榴"/></a></li>
-                <li><a href="{% url 'fruitmall:details' %}"><img src="/static/img/bnr-photo04.jpg" width="744" height="303"
-                                                        alt="蒙自石榴"/></a></li>
-                <li><a href="{% url 'fruitmall:details' %}"><img src="/static/img/bnr-photo05.jpg" width="744" height="303"
-                                                        alt="蒙自石榴"/></a></li>
+                {% for g in goods %}
+                {% for a in ads %}
+                {% if forloop.counter == 1 %}
+                    <li><a href="{% url 'fruitmall:details' g.id  %}"><img src="/media/{{a.img}}" width="744" height="303" alt="蒙自石榴"/></a></li>
+                {% else %}
+                    <li><a href="{% url 'fruitmall:details' g.id %}"><img src="/media/{{a.img}}" width="744" height="303" alt="蒙自石榴"/></a></li>
+                {% endif %}
+                {% endfor %}
+                {% endfor %}
             </ul>
             <ul class="banner-control">
-                <li class="active"></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
+                {% for a in ads %}
+                {% if forloop.counter == 1 %}
+                    <li class="active"></li>
+                {% else %}
+                    <li></li>
+                {% endif %}
+                {% endfor %}
             </ul>
         </div>
-        <div class="promotion-area">
-            <h1 class="title">促销专区</h1>
-            <ul class="promotion-list">
-                <li><a href="{% url 'fruitmall:details' %}"><img src="/static/img/img-promotion01.jpg" alt="樱桃" width="215"
-                                                        height="199"/></a></li>
-                <li><a href="{% url 'fruitmall:details' %}"><img src="/static/img/img-promotion01.jpg" alt="樱桃" width="215"
-                                                        height="199"/></a></li>
-                <li><a href="{% url 'fruitmall:details' %}"><img src="/static/img/img-promotion01.jpg" alt="樱桃" width="215"
-                                                        height="199"/></a></li>
-            </ul>
+        <div style="height: 290px;overflow: hidden">
+            <div class="promotion-area">
+                <h1 class="title">促销专区</h1>
+                <ul class="promotion-list">
+                    {% for g in goods %}
+                        <li><a href="{% url 'fruitmall:details' g.id %}"><img src="/media/{{g.img}}" alt="樱桃" width="215" height="199"/></a></li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
-        <div class="product-show">
+        <div class="product-show" style="height: 260px;overflow: hidden">
             <h1>
                 <span>新鲜水果</span>
                 <span class="show-arrow"></span>
                 <a href="{% url 'fruitmall:product' %}">更多</a>
             </h1>
             <ul class="show-list">
-                <li>
-                    <p><a href="{% url 'fruitmall:details' %}"><img src="/static/img/index/img-products01.jpg" alt="百货"
-                                                           width="136" height="137"/></a></p>
-                    <p class="show-name">水果</p>
-                    <p class="show-price"><a href="{% url 'fruitmall:details' %}">RMB 100</a></p>
-                </li>
-                <li>
-                    <p><a href="{% url 'fruitmall:details' %}"><img src="/static/img/index/img-products01.jpg" alt="百货"
-                                                           width="136" height="137"/></a></p>
-                    <p class="show-name">水果</p>
-                    <p class="show-price"><a href="{% url 'fruitmall:details' %}">RMB 100</a></p>
-                </li>
-                <li>
-                    <p><a href="{% url 'fruitmall:details' %}"><img src="/static/img/index/img-products01.jpg" alt="百货"
-                                                           width="136" height="137"/></a></p>
-                    <p class="show-name">水果</p>
-                    <p class="show-price"><a href="{% url 'fruitmall:details' %}">RMB 100</a></p>
-                </li>
-                <li>
-                    <p><a href="{% url 'fruitmall:details' %}"><img src="/static/img/index/img-products01.jpg" alt="百货"
-                                                           width="136" height="137"/></a></p>
-                    <p class="show-name">水果</p>
-                    <p class="show-price"><a href="{% url 'fruitmall:details' %}">RMB 100</a></p>
-                </li>
-                <li>
-                    <p><a href="{% url 'fruitmall:details' %}"><img src="/static/img/index/img-products01.jpg" alt="百货"
-                                                           width="136" height="137"/></a></p>
-                    <p class="show-name">水果</p>
-                    <p class="show-price"><a href="{% url 'fruitmall:details' %}">RMB 100</a></p>
-                </li>
-                <li>
-                    <p><a href="{% url 'fruitmall:details' %}"><img src="/static/img/index/img-products01.jpg" alt="百货"
-                                                           width="136" height="137"/></a></p>
-                    <p class="show-name">水果</p>
-                    <p class="show-price"><a href="{% url 'fruitmall:details' %}">RMB 100</a></p>
-                </li>
+                {% for g in goods %}
+                    <li>
+                        <p><a href="{% url 'fruitmall:details' g.id %}"><img src="/media/{{g.img}}" alt="百货" width="136" height="137"/></a></p>
+                        <p class="show-name">{{g.name}}</p>
+                        <p class="show-price"><a href="{% url 'fruitmall:details' g.id %}">RMB {{g.price}}</a></p>
+                    </li>
+                {% endfor %}
             </ul>
         </div>
-        <div class="product-show">
+        <div class="product-show" style="height: 260px;overflow: hidden">
             <h1>
                 <span>有机蔬菜</span>
                 <span class="show-arrow"></span>
                 <a href="{% url 'fruitmall:product' %}">更多</a>
             </h1>
             <ul class="show-list">
-                <li>
-                    <p><a href="{% url 'fruitmall:details' %}"><img src="/static/img/index/img-products01.jpg" alt="百货"
-                                                           width="136" height="137"/></a></p>
-                    <p class="show-name">水果</p>
-                    <p class="show-price"><a href="{% url 'fruitmall:details' %}">RMB 100</a></p>
+                {% for g in goods %}
+                    <li>
+                    <p><a href="{% url 'fruitmall:details' g.id %}"><img src="/media/{{g.img}}" alt="百货" width="136" height="137"/></a></p>
+                    <p class="show-name">{{g.name}}</p>
+                    <p class="show-price"><a href="{% url 'fruitmall:details' g.id %}">RMB {{g.price}}</a></p>
                 </li>
-                <li>
-                    <p><a href="{% url 'fruitmall:details' %}"><img src="/static/img/index/img-products01.jpg" alt="百货"
-                                                           width="136" height="137"/></a></p>
-                    <p class="show-name">水果</p>
-                    <p class="show-price"><a href="{% url 'fruitmall:details' %}">RMB 100</a></p>
-                </li>
-                <li>
-                    <p><a href="{% url 'fruitmall:details' %}"><img src="/static/img/index/img-products01.jpg" alt="百货"
-                                                           width="136" height="137"/></a></p>
-                    <p class="show-name">水果</p>
-                    <p class="show-price"><a href="{% url 'fruitmall:details' %}">RMB 100</a></p>
-                </li>
-                <li>
-                    <p><a href="{% url 'fruitmall:details' %}"><img src="/static/img/index/img-products01.jpg" alt="百货"
-                                                           width="136" height="137"/></a></p>
-                    <p class="show-name">水果</p>
-                    <p class="show-price"><a href="{% url 'fruitmall:details' %}">RMB 100</a></p>
-                </li>
+                {% endfor %}
             </ul>
         </div>
-        <div class="product-show">
+        <div class="product-show" style="height: 260px;overflow: hidden">
             <h1>
                 <span>日用百货</span>
                 <span class="show-arrow"></span>
                 <a href="{% url 'fruitmall:product' %}">更多</a>
             </h1>
             <ul class="show-list">
-                <li>
-                    <p><a href="{% url 'fruitmall:details' %}"><img src="/static/img/index/img-products01.jpg" alt="百货"
-                                                           width="136" height="137"/></a></p>
-                    <p class="show-name">水果</p>
-                    <p class="show-price"><a href="{% url 'fruitmall:details' %}">RMB 100</a></p>
-                </li>
-                <li>
-                    <p><a href="{% url 'fruitmall:details' %}"><img src="/static/img/index/img-products01.jpg" alt="百货"
-                                                           width="136" height="137"/></a></p>
-                    <p class="show-name">水果</p>
-                    <p class="show-price"><a href="{% url 'fruitmall:details' %}">RMB 100</a></p>
-                </li>
-                <li>
-                    <p><a href="{% url 'fruitmall:details' %}"><img src="/static/img/index/img-products01.jpg" alt="百货"
-                                                           width="136" height="137"/></a></p>
-                    <p class="show-name">水果</p>
-                    <p class="show-price"><a href="{% url 'fruitmall:details' %}">RMB 100</a></p>
-                </li>
-                <li>
-                    <p><a href="{% url 'fruitmall:details' %}"><img src="/static/img/index/img-products01.jpg" alt="百货"
-                                                           width="136" height="137"/></a></p>
-                    <p class="show-name">水果</p>
-                    <p class="show-price"><a href="{% url 'fruitmall:details' %}">RMB 100</a></p>
-                </li>
+                {% for g in goods %}
+                    <li>
+                        <p><a href="{% url 'fruitmall:details' g.id %}"><img src="/media/{{g.img}}" alt="百货" width="136" height="137"/></a></p>
+                        <p class="show-name">{{g.name}}</p>
+                        <p class="show-price"><a href="{% url 'fruitmall:details' g.id %}">RMB {{g.price}}</a></p>
+                    </li>
+                {% endfor %}
             </ul>
         </div>
-        <div class="product-show">
+        <div class="product-show" style="height: 260px;overflow: hidden">
             <h1>
                 <span>合作伙伴</span>
                 <span class="show-arrow"></span>

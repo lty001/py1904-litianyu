@@ -19,107 +19,67 @@
 <div id="container">
     <div id="nav-side">
         <div class="login-container">
-            <p class="login-title"><img src="/static/img/title-login.gif" alt="会员登入" width="147" height="23"/></p>
-            <form>
-                <ul class="login-input">
-                    <li>
-                        <label>账号：</label>
-                        <input type="text"/>
-                    </li>
-                    <li>
-                        <label>密码：</label>
-                        <input type="password"/>
-                    </li>
-                </ul>
-                <p class="f-password"><a href="javascript:;">忘记密码？</a></p>
                 <p class="login-btn">
-                    <a href="javascript:;"><img src="/static/img/btn-login.gif" width="61" height="19" alt="登入"/></a>
+                    <a href="{% url 'fruitmall:login' %}"><img src="/static/img/btn-login.gif" width="61" height="19" alt="登入"/></a>
                     <a href="{% url 'fruitmall:regist' %}"><img src="/static/img/btn-regist.gif" width="61" height="19" alt="注册"/></a>
                 </p>
-            </form>
         </div>
         <div class="login-container">
             <dl class="login-suc">
                 <dt><img src="/static/img/img-photo.jpg" width="62" height="62" alt="头像"/></dt>
                 <dd>
-                    <p class="user-name">张三丰</p>
-                    <p>您好！</p>
+                    {% if account %}
+                        <p class="user-name">{{account}},</p>
+                        <p>您好！</p>
+                        <button><a href="{% url 'fruitmall:logout' %}">退出</a></button>
+                    {% else %}
+                        <p>尚未登陆！</p>
+                        <button><a href="{% url 'fruitmall:login' %}">登录</a></button>
+                    {% endif %}
                 </dd>
             </dl>
-            <p class="my-fujia"><a href="{% url 'fruitmall:record' %}"><img src="/static/img/btn-personal.gif" width="89"
-                                                                  height="21" alt="我的芙佳"/></a></p>
+            <p class="my-fujia"><a href="{% url 'fruitmall:record' %}"><img src="/static/img/btn-personal.gif" width="89" height="21" alt="我的芙佳"/></a></p>
         </div>
         <div class="pro-kinds">
             <h1 class="kinds-tit">产品分类</h1>
             <div class="kinds-cont">
-                <div class="kinds-det">
+                <div class="kinds-det" style="height: 370px">
                     <h2 class="det-tit">新鲜水果</h2>
                     <div class="det-content">
-                        <a href="{% url 'fruitmall:details' %}">苹果</a>
-                        <a href="{% url 'fruitmall:details' %}">猕猴桃</a>
-                        <a href="{% url 'fruitmall:details' %}">苹果</a>
-                        <a href="{% url 'fruitmall:details' %}">梨青柠檬梨青柠檬</a>
-                        <a href="{% url 'fruitmall:details' %}">苹果</a>
-                        <a href="{% url 'fruitmall:details' %}">猕猴桃</a>
-                        <a href="{% url 'fruitmall:details' %}">苹果</a>
-                        <a href="{% url 'fruitmall:details' %}">梨青柠檬</a>
-                        <a href="{% url 'fruitmall:details' %}">苹果</a>
-                        <a href="{% url 'fruitmall:details' %}">猕猴桃</a>
-                        <a href="{% url 'fruitmall:details' %}">苹果</a>
-                        <a href="{% url 'fruitmall:details' %}">梨青柠...</a>
-                        <a href="{% url 'fruitmall:details' %}">苹果</a>
-                        <a href="{% url 'fruitmall:details' %}">猕猴桃</a>
-                        <a href="{% url 'fruitmall:details' %}">苹果</a>
-                        <a href="{% url 'fruitmall:details' %}">梨青柠檬</a>
+                        {% for g in goods %}
+                        <a href="{% url 'fruitmall:details' g.id %}">{{g.name}}</a>
+                        {% endfor %}
                         <div style="clear: both;"></div>
                     </div>
                 </div>
-                <div class="kinds-det">
+                <div class="kinds-det" style="height: 370px">
                     <h2 class="det-tit">有机蔬菜</h2>
                     <div class="det-content">
-                        <a href="{% url 'fruitmall:details' %}">苹果</a>
-                        <a href="{% url 'fruitmall:details' %}">猕猴桃</a>
-                        <a href="{% url 'fruitmall:details' %}">苹果</a>
-                        <a href="{% url 'fruitmall:details' %}">梨青柠檬梨青柠檬</a>
-                        <a href="{% url 'fruitmall:details' %}">苹果</a>
-                        <a href="{% url 'fruitmall:details' %}">猕猴桃</a>
-                        <a href="{% url 'fruitmall:details' %}">苹果</a>
-                        <a href="{% url 'fruitmall:details' %}">梨青柠檬</a>
-                        <a href="{% url 'fruitmall:details' %}">苹果</a>
-                        <a href="{% url 'fruitmall:details' %}">猕猴桃</a>
-                        <a href="{% url 'fruitmall:details' %}">苹果</a>
-                        <a href="{% url 'fruitmall:details' %}">梨青柠...</a>
-                        <a href="{% url 'fruitmall:details' %}">苹果</a>
-                        <a href="{% url 'fruitmall:details' %}">猕猴桃</a>
-                        <a href="{% url 'fruitmall:details' %}">苹果</a>
-                        <a href="{% url 'fruitmall:details' %}">梨青柠檬</a>
+                        {% for g in goods %}
+                        <a href="{% url 'fruitmall:details' g.id %}">{{g.name}}</a>
+                        {% endfor %}
                         <div style="clear: both;"></div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="hot-sale">
+        <div class="hot-sale" style="height: 610px;overflow: hidden">
             <h1 class="hot-tit">热卖商品</h1>
             <div class="hot-cont">
                 <ul class="hot-list">
-                    <li>
-                        <p><a href="{% url 'fruitmall:details' %}"><img src="/static/img/img-hot01.jpg" width="136" height="112" alt="安岳柠檬"/></a></p>
-                        <p class="hot-name"><a href="{% url 'fruitmall:details' %}">安岳柠檬 <span>RMB:100</span></a></p>
-                    </li>
-                    <li>
-                        <p><a href="{% url 'fruitmall:details' %}"><img src="/static/img/img-hot01.jpg" width="136" height="112" alt="安岳柠檬"/></a></p>
-                        <p class="hot-name"><a href="{% url 'fruitmall:details' %}">安岳柠檬 <span>RMB:100</span></a></p>
-                    </li>
-                    <li>
-                        <p><a href="{% url 'fruitmall:details' %}"><img src="/static/img/img-hot01.jpg" width="136" height="112" alt="安岳柠檬"/></a></p>
-                        <p class="hot-name"><a href="{% url 'fruitmall:details' %}">安岳柠檬 <span>RMB:100</span></a></p>
-                    </li>
+                    {% for g in goods %}
+                        <li>
+                            <p><a href="{% url 'fruitmall:details' g.id %}"><img src="/media/{{g.img}}" width="136" height="112" alt="安岳柠檬"/></a></p>
+                            <p class="hot-name"><a href="{% url 'fruitmall:details' g.id %}">{{g.name}} <span>RMB:{{g.price}}</span></a></p>
+                        </li>
+                    {% endfor %}
                 </ul>
             </div>
         </div>
     </div>
     <div id="content">
         <div class="pro-detail">
+            {% for g in goods %}
             <div class="pro-img">
                 <div id="tsShopContainer">
                     <div id="tsImgS">
@@ -154,12 +114,12 @@
                 <script src="/static/js/ShopShow.js"></script>
             </div>
             <div class="text-container">
-                <h1>绿色生态水晶红富士苹果（10斤）</h1>
-                <p class="pro-text">生态水晶富士苹果，采摘于海拔1000米高原，生态苹果不催红，不打蜡。接受到更多的太阳光，所以苹果口感脆甜，味浓汁多！</p>
+                <h1>{{g.name}}</h1>
+                <p class="pro-text">{{g.desc}}</p>
                 <div class="pro-price">
                     <dl>
                         <dt>促销价</dt>
-                        <dd class="low-price">￥65.80</dd>
+                        <dd class="low-price">￥{{g.price}}</dd>
                     </dl>
                     <dl>
                         <dt>原价</dt>
@@ -193,9 +153,9 @@
                     })
                 </script>
                 <ul class="count-total">
-                    <li>月销量<span>2413</span></li>
-                    <li>累计评价<span>2413</span></li>
-                    <li>送芙佳积分<span>32</span></li>
+                    <li>月销量<span>{{g.goodsdetail_set.first.sales}}</span></li>
+                    <li>累计评价<span>{{g.goodsdetail_set.first.evaluate}}</span></li>
+                    <li>送芙佳积分<span>{{g.integral}}</span></li>
                 </ul>
                 <dl class="pro-stock">
                     <dt>数量</dt>
@@ -205,7 +165,7 @@
                                                                              width="19" height="13"
                                                                              alt=""/></span> <span class="pro-red"><img
                                 src="/static/img/detail/ico-red-number.gif" width="19" height="13" alt=""/></span> </span> 件
-                        <span class="stock-total">库存1218件</span></dd>
+                        <span class="stock-total">库存{{g.num}}件</span></dd>
                 </dl>
                 <script>
                     $(document).ready(function () {
@@ -242,9 +202,11 @@
                 </script>
             </div>
             <div style="clear: both;"></div>
+            {% endfor %}
         </div>
         <div class="goods-evaluation">
-            <h1><a href=".goods-details" class="tab-detail active">商品详情</a><a href=".total-evaluation" class="tab-evaluation">累计评价2413</a></h1>
+            {% for g in goods %}
+            <h1><a href=".goods-details" class="tab-detail active">商品详情</a><a href=".total-evaluation" class="tab-evaluation">累计评价{{g.goodsdetail_set.first.evaluate}}</a></h1>
             <script>
                 $(".goods-evaluation h1 a").click(function () {
                     $(this).addClass("active").siblings().removeClass("active");
@@ -256,136 +218,67 @@
             </script>
             <div class="goods-details">
                 <ul class="goods-para">
-                    <li title="生产许可证编号：330118010649">生产许可证编号：330118010649</li>
-                    <li title="配料表：纯天然绿色洛川红富士纯天然绿色洛川红富士纯天然绿色洛川红富士纯天然绿色洛川红富士">
-                        配料表：纯天然绿色洛川红富士纯天然绿色洛川红富士纯天然绿色洛川红富士纯天然绿色洛川红富士
-                    </li>
+                    <li title="生产许可证编号：330118010649">生产许可证编号：00{{g.id}}</li>
+                    <li title="配料表：{{g.name}}">配料表：{{g.name}}</li>
                     <li title="储藏方法：冷藏">储藏方法：冷藏</li>
                     <li title="保质期：30 天">保质期：30 天</li>
                     <li title="食品添加剂：无">食品添加剂：无</li>
                     <li title="包装方式: 包装">包装方式: 包装</li>
-                    <li title="重量(g): 5000">重量(g): 5000</li>
-                    <li title="热卖时间: 1月 2月 3月 4月 4月 4月 4月 4月 4月 ">热卖时间: 1月 2月 3月 4月 4月 4月 4月 4月 4月</li>
+                    <li title="重量(g): {{g.wight}}">重量(g): {{g.wight}}</li>
+                    <li title="热卖时间: 1月 2月 3月 4月 5月 6月 7月 8月 9月 ">热卖时间: 1月 2月 3月 4月 5月 6月 7月 8月 9月</li>
                     <li title="产地: 中国大陆">产地: 中国大陆</li>
-                    <li title="含量: 5kg及以上">含量: 5kg及以上</li>
-                    <li title="价格: 51-100元">价格: 51-100元</li>
-                    <li title="种类: 红富士">种类: 红富士</li>
+                    <li title="价格: {{g.price}}元">价格: {{g.price}}元</li>
+                    <li title="种类: {{g.desc}}">种类: {{g.desc}}</li>
                 </ul>
-                <p class="goods-img"><img src="/static/img/detail/img-goods01.jpg" width="760" height="465" alt="苹果"/>
+                <p class="goods-img"><img src="/media/{{g.goodsdetail_set.first.img}}" width="760" height="465" alt="苹果"/>
                 </p>
-                <p class="goods-text">灵宝是亚洲最佳苹果适生区和西北黄土高原优势苹果产业带的发源地，连续3年居全国苹果产业品
-                    牌价值县级市第一位。灵宝苹果色泽鲜艳，清甜爽口，营养丰富，耐贮耐运，是通过国家质检总局“原
-                    产地标记注册”专家组审核认证的地方特产。</p>
-                <p class="goods-img"><img src="/static/img/detail/img-goods01.jpg" width="760" height="465" alt="苹果"/>
+                <p class="goods-text">{{g.goodsdetail_set.first.body}}</p>
+                <p class="goods-img"><img src="/media/{{g.goodsdetail_set.first.img}}" width="760" height="465" alt="苹果"/>
                 </p>
             </div>
             <div class="total-evaluation">
                 <ul>
-                    <li>
-                        <p class="eval-content">帮同事买的，非常好，包装也很好</p>
-                        <p class="eval-time">今天</p>
-                        <p class="eval-people">金***s</p>
-                    </li>
-                    <li>
-                        <p class="eval-content">帮同事买的，非常好，包装也很好</p>
-                        <p class="eval-time">今天</p>
-                        <p class="eval-people">金***s</p>
-                    </li>
-                    <li>
-                        <p class="eval-content">帮同事买的，非常好，包装也很好</p>
-                        <p class="eval-time">今天</p>
-                        <p class="eval-people">金***s</p>
-                    </li>
-                    <li>
-                        <p class="eval-content">帮同事买的，非常好，包装也很好</p>
-                        <p class="eval-time">今天</p>
-                        <p class="eval-people">金***s</p>
-                    </li>
-                    <li>
-                        <p class="eval-content">帮同事买的，非常好，包装也很好</p>
-                        <p class="eval-time">今天</p>
-                        <p class="eval-people">金***s</p>
-                    </li>
-                    <li>
-                        <p class="eval-content">帮同事买的，非常好，包装也很好</p>
-                        <p class="eval-time">今天</p>
-                        <p class="eval-people">金***s</p>
-                    </li>
-                    <li>
-                        <p class="eval-content">帮同事买的，非常好，包装也很好</p>
-                        <p class="eval-time">今天</p>
-                        <p class="eval-people">金***s</p>
-                    </li>
-                    <li>
-                        <p class="eval-content">帮同事买的，非常好，包装也很好</p>
-                        <p class="eval-time">今天</p>
-                        <p class="eval-people">金***s</p>
-                    </li>
-                    <li>
-                        <p class="eval-content">帮同事买的，非常好，包装也很好</p>
-                        <p class="eval-time">今天</p>
-                        <p class="eval-people">金***s</p>
-                    </li>
+                    {% for i in page.object_list %}
+                        <li>
+                            <p class="eval-content">{{i.content}}</p>
+                            <p class="eval-time">{{i.create_time}}</p>
+                            <p class="eval-people">{{i.name}}</p>
+                        </li>
+                    {% endfor %}
                 </ul>
                 <div class="page-list">
-                    <p><span>&lt;上一页</span> <span class="page-active">1</span> <span>2</span> <span>3</span>
-                        <span>4</span> <span>5</span> <span>6</span> <span>7</span> <span>下一页&gt;</span></p>
+                    <p>
+                        {% if page.has_previous %}
+                            <span> <a href="?page={{page.previous_page_number}}">&lt;上一页</a></span>
+                        {% endif %}
+
+                        {% for i in page.paginator.page_range %}
+                            {% if i == page.number %}
+                                <span class="page-active"><a href="?page={{i}}">{{i}}</a></span>
+                            {% else %}
+                                <span><a href="?page={{i}}">{{i}}</a></span>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if page.has_next %}
+                            <span><a href="?page={{page.next_page_number}}">下一页&gt;</a></span>
+                        {% endif %}
+                    </p>
                 </div>
             </div>
+            {% endfor %}
         </div>
         <div class="recommend">
             <h1 class="title">掌柜推荐</h1>
             <div class="rec-slider">
                 <ul>
-                    <li>
-                        <p class="recom-img"><a href="{% url 'fruitmall:details' %}"><img
-                                src="/static/img/ico-recommend01.jpg" alt="猕猴桃" width="163" height="153"/> <span></span>
-                        </a></p>
-                        <p class="recom-name"><a href="{% url 'fruitmall:details' %}">猕猴桃（新品上市）</a></p>
-                        <p class="recom-price">￥5.60/斤</p>
-                    </li>
-                    <li>
-                        <p class="recom-img"><a href="{% url 'fruitmall:details' %}"><img
-                                src="/static/img/ico-recommend01.jpg" alt="猕猴桃" width="163" height="153"/> <span></span>
-                        </a></p>
-                        <p class="recom-name"><a href="{% url 'fruitmall:details' %}">猕猴桃（新品上市）</a></p>
-                        <p class="recom-price">￥5.60/斤</p>
-                    </li>
-                    <li>
-                        <p class="recom-img"><a href="{% url 'fruitmall:details' %}"><img
-                                src="/static/img/ico-recommend01.jpg" alt="猕猴桃" width="163" height="153"/> <span></span>
-                        </a></p>
-                        <p class="recom-name"><a href="{% url 'fruitmall:details' %}">猕猴桃（新品上市）</a></p>
-                        <p class="recom-price">￥5.60/斤</p>
-                    </li>
-                    <li>
-                        <p class="recom-img"><a href="{% url 'fruitmall:details' %}"><img
-                                src="/static/img/ico-recommend01.jpg" alt="猕猴桃" width="163" height="153"/> <span></span>
-                        </a></p>
-                        <p class="recom-name"><a href="{% url 'fruitmall:details' %}">猕猴桃（新品上市）</a></p>
-                        <p class="recom-price">￥5.60/斤</p>
-                    </li>
-                    <li>
-                        <p class="recom-img"><a href="{% url 'fruitmall:details' %}"><img
-                                src="/static/img/ico-recommend01.jpg" alt="猕猴桃" width="163" height="153"/> <span></span>
-                        </a></p>
-                        <p class="recom-name"><a href="{% url 'fruitmall:details' %}">猕猴桃（新品上市）</a></p>
-                        <p class="recom-price">￥5.60/斤</p>
-                    </li>
-                    <li>
-                        <p class="recom-img"><a href="{% url 'fruitmall:details' %}"><img
-                                src="/static/img/ico-recommend01.jpg" alt="猕猴桃" width="163" height="153"/> <span></span>
-                        </a></p>
-                        <p class="recom-name"><a href="{% url 'fruitmall:details' %}">猕猴桃（新品上市）</a></p>
-                        <p class="recom-price">￥5.60/斤</p>
-                    </li>
-                    <li>
-                        <p class="recom-img"><a href="{% url 'fruitmall:details' %}"><img
-                                src="/static/img/ico-recommend01.jpg" alt="猕猴桃" width="163" height="153"/> <span></span></a>
-                        </p>
-                        <p class="recom-name"><a href="{% url 'fruitmall:details' %}">猕猴桃（新品上市）</a></p>
-                        <p class="recom-price">￥5.60/斤</p>
-                    </li>
+                    {% for g in goods %}
+                        <li>
+                            <p class="recom-img"><a href="{% url 'fruitmall:details' g.id %}"><img src="/media/{{g.img}}" alt="猕猴桃" width="163" height="153"/> <span></span> </a></p>
+                            <p class="recom-name"><a href="{% url 'fruitmall:details' g.id %}">{{g.name}}（新品上市）</a></p>
+                            <p class="recom-price">￥{{g.price}}/斤</p>
+                        </li>
+                    {% endfor %}
                 </ul>
             </div>
             <p class="recommend-tab">

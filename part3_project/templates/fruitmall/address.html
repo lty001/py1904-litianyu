@@ -16,23 +16,30 @@
     <div id="nav-side">
         <div class="person-container">
             <div class="person-message">
-                <p class="person-photo"><img src="/static/img/img-person.jpg" width="87" height="87" alt="张三丰"/></p>
-                <p class="person-name">张三丰，您好！</p>
-                <p class="person-repair"><a href="{% url 'fruitmall:data' %}">[修改]</a></p>
+                <p class="person-photo"><img src="/static/img/img-person.jpg" width="87" height="87" alt="{{account}}"/></p>
+                {% if account %}
+                    <p class="person-name">{{account}}，您好！</p>
+                    <p class="person-repair"><a href="{% url 'fruitmall:data' %}">[修改]</a></p>
+                {% else %}
+                    <p class="person-name">尚未登陆！</p>
+                    <p class="person-repair"><a href="{% url 'fruitmall:data' %}"><button>登录</button></a></p>
+                {% endif %}
             </div>
             <div class="my-message">
-                <p class="my-address">
+                {% for i in up %}
+                    <p class="my-address">
                     <a href="{% url 'fruitmall:address' %}">我的地址</a>
-                </p>
-                <p class="my-intrgral">
-                    <a href="{% url 'fruitmall:integral' %}">我的积分：<span>122</span></a>
-                </p>
-                <p class="my-coupon">
-                    <a href="{% url 'fruitmall:coupon' %}">我的优惠券：<span>4张</span></a>
-                </p>
-                <p class="my-record">
-                    <a href="{% url 'fruitmall:record' %}">购买记录</a>
-                </p>
+                    </p>
+                    <p class="my-intrgral">
+                        <a href="{% url 'fruitmall:integral' %}">我的积分：<span>{{i.integral}}</span></a>
+                    </p>
+                    <p class="my-coupon">
+                        <a href="{% url 'fruitmall:coupon' %}">我的优惠券：<span>{{i.coupon}}张</span></a>
+                    </p>
+                    <p class="my-record">
+                        <a href="{% url 'fruitmall:record' %}">购买记录</a>
+                    </p>
+                {% endfor %}
             </div>
         </div>
     </div>
