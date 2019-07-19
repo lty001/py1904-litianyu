@@ -3,6 +3,9 @@ from .models import *
 
 
 
+
+
+
 xadmin.site.register(Ads)
 xadmin.site.register(AddGoods)
 xadmin.site.register(UserPack)

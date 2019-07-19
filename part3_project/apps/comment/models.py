@@ -10,3 +10,6 @@ class Comment(models.Model):
     content=models.TextField()
     create_time=models.DateTimeField(auto_now_add=True)
     goods=models.ForeignKey(AddGoods,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name

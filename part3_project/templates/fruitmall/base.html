@@ -60,8 +60,10 @@
             {% endfor %}
         </ul>
         <div class="search-container">
-            <input type="text" onfocus="this.value='';$(this).css('color','#313131');" value="请输入商品名称或输入关键字"/>
-            <a href="javascript:;"><img src="/static/img/ico-search.gif" alt="搜索" width="64" height="23"/></a>
+            <form method="get" action="/search/">
+                <input type="text" onfocus="this.value='';$(this).css('color','#313131');" value="请输入商品名称或输入关键字" name="q"/>
+                <button type="submit"><img src="/static/img/ico-search.gif" alt="搜索" width="64" height="23"/></button>
+            </form>
         </div>
     </div>
 </div>

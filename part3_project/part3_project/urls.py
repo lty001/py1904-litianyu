@@ -25,5 +25,6 @@ urlpatterns = [
     path('xadmin/', xadmin.site.urls),
     url('',include('fruitmall.urls',namespace='fruitmall')),
     url('',include('comment.urls',namespace='comment')),
+    url('search/',include('haystack.urls')),
     url(r'^media/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT}),
 ]
